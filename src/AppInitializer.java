@@ -3,34 +3,27 @@ import entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.Arrays;
+
 public class AppInitializer {
     public static void main(String[] args) {
         try(Session session=HibernateUtil.getSessionFactory().openSession()){
             Transaction transaction=session.beginTransaction();
             //------------------------
-           /* Laptop laptop=new Laptop();
-            laptop.setBrand("Lenovo");
+            Laptop laptop1=new Laptop();
+            Laptop laptop2=new Laptop();
+
+            laptop1.setBrand("Lenovo");
+            laptop2.setBrand("Mac");
 
             Student student=new Student();
             student.setStudentName("kamal");
 
-            student.setLaptop(laptop);
+            student.setLaptops(Arrays.asList(laptop1,laptop2));
 
-            session.persist(student);
+            session.save(student);
             //--------------------
-            transaction.commit();*/
-        }
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Student student = session.get(Student.class, (long)1);
-            if (null!=student){
-                System.out.println(student.getStudentName());
-            }
-        }
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Laptop laptop = session.get(Laptop.class, (long)1);
-            if (null!=laptop){
-                System.out.println(laptop.getStudent());
-            }
+            transaction.commit();
         }
     }
 }

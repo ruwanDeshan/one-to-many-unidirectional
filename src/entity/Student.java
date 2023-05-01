@@ -1,5 +1,8 @@
 package entity;
 
+import javax.persistence.*;
+import java.util.List;
+
 @Entity(name = "student_table")
 public class Student {
     @Id
@@ -9,27 +12,18 @@ public class Student {
     private String studentName;
 
     //------------mapping-----------
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "laptop_id")
-    private Laptop laptop;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Laptop> laptops;
+
     //------------mapping-----------
 
 
     public Student() {
     }
 
-    public Student(long studentId, String studentName, Laptop laptop) {
+    public Student(long studentId, String studentName) {
         this.studentId = studentId;
         this.studentName = studentName;
-        this.laptop = laptop;
-    }
-
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
     }
 
     public long getStudentId() {
@@ -48,12 +42,11 @@ public class Student {
         this.studentName = studentName;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "studentId=" + studentId +
-                ", studentName='" + studentName + '\'' +
-                ", laptop=" + laptop +
-                '}';
+    public List<Laptop> getLaptops() {
+        return laptops;
+    }
+
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
     }
 }

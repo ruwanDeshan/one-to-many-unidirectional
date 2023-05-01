@@ -1,5 +1,7 @@
 package entity;
 
+import javax.persistence.*;
+
 @Entity(name = "laptop_table")
 public class Laptop {
     @Id
@@ -10,26 +12,16 @@ public class Laptop {
     private String brand;
 
     //--------mapping------------
-    @OneToOne(mappedBy = "laptop")
-    private Student student;
+
     //--------mapping------------
 
 
     public Laptop() {
     }
 
-    public Laptop(long laptopId, String brand, Student student) {
+    public Laptop(long laptopId, String brand) {
         this.laptopId = laptopId;
         this.brand = brand;
-        this.student = student;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 
     public long getLaptopId() {
@@ -47,13 +39,4 @@ public class Laptop {
     public void setBrand(String brand) {
         this.brand = brand;
     }
-
-  /*  @Override
-    public String toString() {
-        return "Laptop{" +
-                "laptopId=" + laptopId +
-                ", brand='" + brand + '\'' +
-                ", student=" + student +
-                '}';
-    }*/
 }
